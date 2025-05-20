@@ -1,0 +1,9 @@
+.modal-content {
+    border-radius: 15px;
+    transition: all 0.3s ease-in-out;
+}
+
+.toast {
+    opacity: 1 !important;
+    border-radius: 10px;
+}
