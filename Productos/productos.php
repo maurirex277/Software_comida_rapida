@@ -17,8 +17,7 @@ require '../db_connect.php';
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Tu propio CSS -->
-    <link href="css/estilos_productos.css" rel="stylesheet"> <!-- Puedes crear este archivo -->
-
+    <link href="css/estilos_productos.css" rel="stylesheet">
 </head>
 <body class="bg-light">
 
@@ -50,6 +49,11 @@ require '../db_connect.php';
             <a href="agregar_productos.php" class="btn btn-primary me-2">➕ Agregar Producto</a>
             <a href="../dashboard.php" class="btn btn-secondary">🏠 Volver al menú</a>
         </div>
+    </div>
+
+    <!-- Buscador -->
+    <div class="mb-3">
+        <input type="text" id="buscador" class="form-control shadow-sm" placeholder="🔍 Buscar producto por nombre o descripción...">
     </div>
 
     <table class="table table-bordered table-hover bg-white shadow-sm">
@@ -131,6 +135,23 @@ require '../db_connect.php';
         const toast = new bootstrap.Toast(document.getElementById('toastCancelado'));
         toast.show();
     }
+
+    // Filtro en tiempo real
+    document.getElementById('buscador').addEventListener('keyup', function () {
+        const filtro = this.value.toLowerCase();
+        const filas = document.querySelectorAll('table tbody tr');
+
+        filas.forEach(fila => {
+            const nombre = fila.children[1].textContent.toLowerCase();
+            const descripcion = fila.children[2].textContent.toLowerCase();
+
+            if (nombre.includes(filtro) || descripcion.includes(filtro)) {
+                fila.style.display = '';
+            } else {
+                fila.style.display = 'none';
+            }
+        });
+    });
 </script>
 
 </body>
